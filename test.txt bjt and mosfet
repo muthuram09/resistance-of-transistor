@@ -1,0 +1,277 @@
+print('''NOTE:-Please enter the values in the following form:
+\t\tresistance = ohm
+\t\tvoltage = volt
+\t\tcurrent = ampere
+\t\tEnter only values not units.
+\t\tFor selecting options enter only numbers.'''  )
+for i in (1,1000):
+  print('\n1.BJT','\n2.JFET','\n3.MOSFET')
+  type = int(input("Select type of transistor :"))
+  if (type ==1):
+    print ('\n1.Fixed','\n2.Emitter','\n3.Voltage-divider',
+    '\n4.Collector-feedback','\n5.Emitter-follower',
+    '\n6.Common-base' )
+    a =int(input("Select type of bias:"))
+    if a == 1:
+      dm = input("Diode material (Si/Ge/other) :").lower()
+      if dm == "si" :
+        vbe = 0.7
+      elif dm == 'ge':
+        vbe = 0.3
+      else:
+        vbe=float(input("Vbe :"))
+      B = float(input("hfe (Beta) :"))
+      vcc = float(input("Vcc :"))
+      vce = float(input("Vce :"))
+      ic = float(input("Ic  :"))
+      ib = ic/B
+      print('Ib  :',ib,'A')
+      ie = (B+1)*ib
+      rb = (vcc-vbe)/ib
+      print('Rb  :','%.4f'%rb,'ohm')
+      rc = (vcc-vce)/ic
+      print('Rc  :','%.4f'%rc,'ohm')
+  
+    elif a==2:
+      dm = input("Diode material (Si/Ge/other) :").lower()
+      if dm == "si" :
+        vbe = 0.7
+      elif dm == 'ge':
+        vbe = 0.3
+      else:
+        vbe=float(input("Vbe :"))
+      B = float(input("hfe (Beta) :"))
+      vcc = float(input("Vcc :"))
+      vce = float(input("Vce :"))
+      ic = float(input("Ic  :"))
+      ib = ic/B
+      print('Ib  :',ib,'A')
+      ie = (B+1)*ib
+      print("Ie  :",ie,'A')
+      re = vce/ie
+      rb = (vcc-vbe-(ie*re))/ib
+      rc = (vcc-vce-(ie*re))/ic
+      print('Rb  :','%.4f'%rb,'ohm')
+      print('Rc  :','%.4f'%rc,'ohm')
+      print('Re  :',re,'ohm')if(re<0) else print('Re',' :','%.4f'%re,'ohm')
+    
+    elif (a==3):
+      dm = input("Diode material (Si/Ge/other) :").lower()
+      if dm == "si" :
+        vbe = 0.7
+      elif dm == 'ge':
+        vbe = 0.3
+      else:
+        vbe=float(input("Vbe :"))
+      B = float(input("hfe (Beta) :"))
+      vcc = float(input("Vcc :"))
+      vce = float(input("Vce :"))
+      ic = float(input("Ic  :"))
+      ib = ic/B
+      print('Ib  :',ib,'A')
+      ie = (B+1)*ib
+      r1 = float(input('R1  :'))
+      r2 = float(input('R2  :'))
+      eth = (r2*vcc)/(r1+r2)
+      print("Ie  :",'%.4f'%ie,'A')
+      print('Eth :','%.4f'%eth,'V')
+      rth= (r1*r2)/(r1+r2)
+      re= (vcc-vbe-(rth*ib))/ie
+      rc= (vcc-vce-(ie*re))/ic
+      print('Rth :','%.4f'%rth,'ohm')
+      print('Rc  :','%.4f'%rc,'ohm')
+      print('Re  :',re,'ohm')if(re<0) else print('Re',' :','%.4f'%re,'ohm')
+    
+    elif (a==4):
+      dm = input("Diode material (Si/Ge/other) :").lower()
+      if dm == "si" :
+        vbe = 0.7
+      elif dm == 'ge':
+        vbe = 0.3
+      else:
+        vbe=float(input("Vbe :"))
+      B = float(input("hfe (Beta) :"))
+      vcc = float(input("Vcc :"))
+      vce = float(input("Vce :"))
+      ic = float(input("Ic  :"))
+      ib = ic/B
+      print('Ib  :','%.4f'%ib,'A')
+      ie = (B+1)*ib
+      re = vce/ie
+      rc=(vcc-vce-(ie*re))/ic
+      rf=(vcc-vbe-(ic*(re+rc)))/ib
+      print("Ie  :",'%.4f'%ie,'A')
+      print('Rf  :','%.4f'%rf,'ohm')
+      print('Rc  :','%.4f'%rc,'ohm')
+      print('Re  :',re,'ohm')if(re<0) else print('Re',' :','%.4f'%re,'ohm')
+    
+    elif (a==5):
+      dm = input("Diode material (Si/Ge/other) :").lower()
+      if dm == "si" :
+        vbe = 0.7
+      elif dm == 'ge':
+        vbe = 0.3
+      else:
+        vbe=float(input("Vbe :"))
+      B = float(input("hfe (Beta) :"))
+      vee= float(input('Vee :'))
+      vce = float(input("Vce :"))
+      ie = float(input('Ie  :'))
+      ib = ie/(B+1)
+      ic = B*ib
+      re = (vee-vce)/ie
+      rb = (vee-vbe-ic)/ib
+      print("Ib  :",'%.4f'%ib,'A')
+      print("Ie  :",'%.4f'%ie,'A')
+      print('Rb  :','%.4f'%rb,'ohm')
+      print('Re  :',re,'ohm')if(re<0) else print('Re',' :','%.4f'%re,'ohm')
+  
+    elif (a==6):
+      dm = input("Diode material (Si/Ge/other) :").lower()
+      if dm == "si" :
+        vbe = 0.7
+      elif dm == 'ge':
+        vbe = 0.3
+      else:
+        vbe=float(input("Vbe :"))
+      B = float(input("hfe (Beta) :"))
+      vcc= float(input('Vcc :'))
+      vee= float(input('Vee :'))
+      vce = float(input("Vce :"))
+      ic = float(input('Ic  :'))
+      ib = ic/B
+      ie = ib*(B+1)
+      re = (vee-vbe)/ie 
+      rc = (vee+vcc-vce-(ie*re))/ic
+      vcb=vcc-(ic*rc)
+      print("Ib  :",'%.4f'%ie,'A')
+      print("Ie  :",'%.4f'%ie,'A')
+      print('Rc  :','%.4f'%rc,'ohm')
+      print('Re  :',re,'ohm')if(re<0) else print('Re',' :','%.4f'%re,'ohm')
+      print('Vcb :','%.4f'%vcb,'V')
+    
+    else:
+      print('\nInvalid Input')
+      continue
+    break
+  elif (type ==2):
+      print('\n1.Fixed-bias','\n2.Self-bias','\n3.Voltage-divider','\n4.Common-gate','\n5.RD=0','\n6.Special case')
+      c=int(input('Select type of bias:'))
+      if (c==1):
+        vdd=int(input('Vdd :'))
+        id = float(input('Id  :'))
+        vds=float(input('Vds :'))
+        print('Ig  : 0 A')
+        print('Rg  : 0 ohm')
+        rd = (vdd-vds)/id
+        print('Rd  :','%.4f'%rd,'ohm')
+      elif(c==2):
+        vdd=int(input('Vdd :'))
+        id = float(input('Id  :'))
+        vgs=float(input('Vgs :'))
+        vds=float(input('Vds :'))
+        rs = (-vgs)/id
+        rd = (vdd-vds-(id*rs))/id
+        print('Rs  :','%.4f'%rs,'ohm')
+        print('Rd  :','%.4f'%rd,'ohm')
+
+      elif(c==3):
+        vdd=int(input('Vdd :'))
+        id = float(input('Id  :'))
+        vgs=float(input('Vgs :'))
+        vds=float(input('Vds :'))
+        r1 = float(input('R1  :'))
+        r2 = float(input('R2  :'))
+        vg =(r2*vdd)/(r1+r2)
+        rs =(vg-vgs)/id
+        rd =(vdd-vds-(id*rs))/id
+        print('Vg  :','%.4f'%vg,'V')
+        print('Rs  :','%.4f'%rs,'ohm')
+        print('Rd  :','%.4f'%rd,'ohm')
+
+      elif(c==4):
+        vdd=int(input('Vdd :'))
+        id = float(input('Id  :'))
+        vgs=float(input('Vgs :'))
+        vds=float(input('Vds :'))
+        vss=float(input('Vss :'))
+        rs = (vss-vgs)/id
+        rd = (vdd+vss-vds-(id*rs))/id
+        print('Rs  :','%.4f'%rs,'ohm')
+        print('Rd  :','%.4f'%rd,'ohm')
+
+      elif(c==5):
+        vdd=int(input('Vdd :'))
+        id = float(input('Id  :'))
+        vgs=float(input('Vgs :'))
+        vds=float(input('Vds :'))
+        print('Rd  :0 ohm')
+        rs=(-vgs)/id
+        print('Rs  :','%.4f'%rs,'ohm')
+
+      elif(c==6):
+        vdd=int(input('Vdd :'))
+        id = float(input('Id  :'))
+        vds=float(input('Vds :'))
+        print('Vgs :0 V')
+        rd = (vdd-vds)/id
+        print('Rd  :','%.4f'%rd,'ohm')
+
+      else:
+        print('\nInvalid Input')
+        continue
+      break
+  elif (type ==3):
+     print('\n1.Fixed-bias (Depletion type)','\n2.Voltage-divider bias (Depletion type)','\n3.Feedback configuration (Enhancement type)','\n4.Voltage-divider bias (Enhancement type)')
+     d=int(input('Select type of bias:'))
+     if(d==1):
+       vdd=int(input('Vdd :'))
+       id = float(input('Id  :'))
+       vds=float(input('Vds :'))
+       print('Ig  :0 A')
+       print('Rg  :0 ohm')
+       rs = (vdd-vds)/id
+       print('Rs  :','%.4f'%rs,'ohm')
+   
+     elif(d==2):
+       vdd=int(input('Vdd :'))
+       id = float(input('Id  :'))
+       vgs=float(input('Vgs :'))
+       vds=float(input('Vds :'))
+       r1 = float(input('R1  :'))
+       r2 = float(input('R2  :'))
+       vg =(r2*vdd)/(r1+r2)
+       rs =(vg-vgs)/id
+       rd =(vdd-vds-(id*rs))/id
+       print('Vg  :','%.4f'%vg,'V')
+       print('Rs  :','%.4f'%rs,'ohm')
+       print('Rd  :','%.4f'%rd,'ohm')
+     
+     elif(d ==3):
+       vdd=int(input('Vdd :'))
+       id = float(input('Id  :'))
+       vgs=float(input('Vgs :'))
+       print('Ig  :0 A')
+       rd = (vdd-vgs)/id
+       print('Rd  :','%.4f'%rd,'ohm')
+
+     elif(d == 4):
+       vdd=int(input('Vdd :'))
+       id = float(input('Id  :'))
+       vds=float(input('Vds :'))
+       vgs=float(input('Vgs :'))
+       r1 = float(input('R1  :'))
+       r2 = float(input('R2  :'))
+       vg =(r2*vdd)/(r1+r2)
+       rs =(vg-vgs)/id
+       rd =(vdd-vds-(id*rs))/id
+       print('Vg  :','%.4f'%vg,'V')
+       print('Rs  :','%.4f'%rs,'ohm')
+       print('Rd  :','%.4f'%rd,'ohm')
+     else:
+       print('\nInvalid Input')
+       continue
+     break
+  else:
+    print('\nInvalid Input')
+    continue
